@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.form-container {
+    width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="firstname"],
+input[type="lastname"]
+ {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+.form-footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#password-error{
+    font-size: 5;
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+#email-error{
+    font-size: 10;
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+#firstname-error{
+    font-size: 10;
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+#lastname-error{
+    font-size: 10;
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}

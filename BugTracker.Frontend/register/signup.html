@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="form-container">
+        <form  id="registration-form" method="POST">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+                <label for="firstname">First name:</label>
+                <input type="firstname" id="firstname" name="firstname" required>
+                <span id="firstname-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last name:</label>
+                <input type="lastname" id="lastname" name="lastname" required>
+                <span id="lastname-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="email-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span id="password-error"></span>
+            </div>
+            <button type="submit">Sign up</button>
+        </form>
+        <div class="form-footer">
+            <p id="login-link">I have an account <a href="#">Sign in</a></p>
+        </div>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+</html>

@@ -6,7 +6,6 @@ namespace BugTracker.Domain.Entities.Identity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        public virtual ICollection<Project> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
     }
 }

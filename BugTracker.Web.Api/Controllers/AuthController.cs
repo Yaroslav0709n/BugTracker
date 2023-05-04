@@ -1,8 +1,10 @@
 ﻿using BugTracker.Application.Dtos.User;
 using BugTracker.Application.IServices;
 using BugTracker.Domain.Entities.Identity;
+using BugTracker.Infrastructure.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Web.Api.Controllers
 {
@@ -12,12 +14,14 @@ namespace BugTracker.Web.Api.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
+        private readonly IdentityBugTrackerContext _context;
         public AuthController(UserManager<ApplicationUser> userManager,
                               ITokenService tokenService,
-                              ILogger<AuthController> logger)
+                              IdentityBugTrackerContext context)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _context = context;
         }
 
         [HttpPost]
@@ -30,9 +34,9 @@ namespace BugTracker.Web.Api.Controllers
 
             ApplicationUser user = new ApplicationUser()
             {
-                UserName = registerDto.Email,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
+                UserName = registerDto.Email,
                 Email = registerDto.Email,
             };
 
@@ -45,13 +49,13 @@ namespace BugTracker.Web.Api.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            return Ok("All okay!!!!!");
+            return Ok("Sign up complete");
         }
 
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
@@ -64,7 +68,13 @@ namespace BugTracker.Web.Api.Controllers
                 return BadRequest(new { message = "Invalid password" });
             }
 
-            return Ok(_tokenService.CreateToken(user));
+            return new UserDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Token = _tokenService.CreateToken(user)
+            };
         }
     }
 }

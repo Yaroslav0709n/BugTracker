@@ -9,8 +9,6 @@ namespace BugTracker.Infrastructure.Context
         public IdentityBugTrackerContext(DbContextOptions<IdentityBugTrackerContext> options) : base(options)
         {
         }
-
-        public DbSet<ApplicationUser> User { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

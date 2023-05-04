@@ -13,7 +13,7 @@ namespace BugTracker.Infrastructure.Context
             var host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((context, configuration) =>
                 {
-                    configuration.AddJsonFile(@"BugTracker.Web.Api\appsettings.json");
+                    configuration.AddJsonFile(@"E:\vs2\BugTracker\BugTracker.Web.Api\appsettings.json");
                 })
                 .Build();
 

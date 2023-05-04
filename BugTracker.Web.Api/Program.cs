@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Logging;
-
+using BugTracker.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +25,7 @@ builder.Services.AddCorsService();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenService();
 builder.Services.AddApplicationService();
-
+builder.Services.AddAutoMapper(typeof(ProjectMapper).Assembly);
 
 var app = builder.Build();
 

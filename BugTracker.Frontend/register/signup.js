@@ -41,7 +41,7 @@ registrationForm.addEventListener('submit', (event) => {
     }
   })
   .then(data => {
-    if (data.includes('All okay!!!!!')) {
+    if (data.includes('Sign up complete')) {
       window.location.href = '../login/signin.html';
     } else {
       console.error('Unexpected response:', data);

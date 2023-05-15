@@ -1,6 +1,7 @@
 ﻿using BugTracker.Domain.Entities;
 using BugTracker.Domain.IRepositories;
 using BugTracker.Infrastructure.Context.ApplicationDbContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Infrastructure.Repositories
 {
@@ -12,31 +13,52 @@ namespace BugTracker.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Project> AddProject(Project project)
+        public async Task<Project> AddProject(Project project, string userId)
         {
             await _context.Project.AddAsync(project);
+            await _context.SaveChangesAsync();
+
+            var projectUser = new ProjectUser
+            {
+                ProjectId = project.Id,
+                ApplicationUserId = userId,
+            };
+
+            await _context.ProjectUser.AddAsync(projectUser);
             await _context.SaveChangesAsync();
             return project;
         }
 
-        public Task DeleteProject(int id)
+        public async Task DeleteProjectAsync(int projectId)
         {
-            throw new NotImplementedException();
+            var project = await _context.Project.FindAsync(projectId);
+            var projectUser = await _context.ProjectUser.FirstOrDefaultAsync(x => x.ProjectId == projectId);
+            _context.Project.Remove(project);
+            if(projectUser !=  null) 
+            {
+                _context.ProjectUser.Remove(projectUser);
+            }
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Project>> GetAllProjects()
+        public async Task<IEnumerable<Project>> GetAllProjectsAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _context.ProjectUser
+                .Where(pu => pu.ApplicationUserId == userId)
+                .Select(pu => pu.Project)
+                .ToListAsync();
         }
 
-        public Task<Project> GetById(int id)
+        public async Task<Project> GetProjectAsync(int projectId)
         {
-            throw new NotImplementedException();
+            return await _context.Project.FindAsync(projectId);
         }
 
-        public Task UpdateProject(Project project)
+        public async Task<Project> UpdateProjectAsync(Project project)
         {
-            throw new NotImplementedException();
+            await _context.Project.FindAsync(project.Id);
+            await _context.SaveChangesAsync();
+            return project;
         }
     }
 }

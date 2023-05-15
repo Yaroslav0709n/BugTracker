@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BugTracker.Application.Dtos;
+using BugTracker.Application.Dtos.Project;
 using BugTracker.Application.IServices;
 using BugTracker.Domain.Entities;
 using BugTracker.Domain.IRepositories;
@@ -16,33 +16,45 @@ namespace BugTracker.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<Project> CreateProject(string userId, ProjectDto projectDto)
+        public async Task<Project> CreateProject(ProjectDto projectDto, string userId)
         {
             var project = _mapper.Map<Project>(projectDto);
 
-            project.ApplicationUserId = userId;
+            project.CreateTime = DateTime.Now;
+            project.UpdateTime = DateTime.Now;
 
-            return await _projectRepository.AddProject(project);
+            return await _projectRepository.AddProject(project, userId);
         }
 
-        public Task DeleteProject(int id)
+        public Task DeleteProject(int projectId)
         {
-            throw new NotImplementedException();
+            return _projectRepository.DeleteProjectAsync(projectId);
         }
 
-        public async Task<IEnumerable<Project>> GetAllProjects()
+        public async Task<IEnumerable<ProjectDto>> GetAllProjects(string userId)
         {
-            return await _projectRepository.GetAllProjects();
+            var projects = await _projectRepository.GetAllProjectsAsync(userId);
+            return _mapper.Map<IEnumerable<ProjectDto>>(projects);
         }
 
-        public Task<Project> GetById(int id)
+        public async Task<ProjectDto> GetProject(int projectId)
         {
-            throw new NotImplementedException();
+            var project = await _projectRepository.GetProjectAsync(projectId);
+            return _mapper.Map<ProjectDto>(project);
         }
 
-        public Task UpdateProject(ProjectDto project)
+        public async Task<UpdateProjectDto> UpdateProject(int projectId, UpdateProjectDto projectDto)
         {
-            throw new NotImplementedException();
+            var existProject = await _projectRepository.GetProjectAsync(projectId);
+
+            var project = _mapper.Map<Project>(projectDto);
+            existProject.Name = projectDto.Name;
+            existProject.Description = projectDto.Description;
+            existProject.UpdateTime = DateTime.Now;
+            var updatedProject = await _projectRepository.UpdateProjectAsync(project);
+
+            return _mapper.Map<UpdateProjectDto>(updatedProject);
+
         }
     }
 }

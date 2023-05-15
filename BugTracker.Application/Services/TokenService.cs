@@ -17,6 +17,7 @@ namespace BugTracker.Application.Services
                 {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.Role, user.Role),
                 };
 
             var authSigningKeys = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthOptions.KEY));

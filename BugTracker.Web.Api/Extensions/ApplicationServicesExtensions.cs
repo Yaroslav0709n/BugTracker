@@ -12,6 +12,8 @@ namespace BugTracker.Web.Api.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IProjectUserService, ProjectUserService>();
+            services.AddScoped<IProjectUserRepository, ProjectUserRepository>();
             return services;
         }
     }

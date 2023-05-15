@@ -4,10 +4,10 @@ namespace BugTracker.Domain.IRepositories
 {
     public interface IProjectRepository
     {
-        Task<IEnumerable<Project>> GetAllProjects();
-        Task<Project> GetById(int id);
-        Task<Project> AddProject(Project project);
-        Task UpdateProject(Project project);
-        Task DeleteProject(int id);
+        Task<IEnumerable<Project>> GetAllProjectsAsync(string userId);
+        Task<Project> GetProjectAsync(int projectId);
+        Task<Project> AddProject(Project project, string userId);
+        Task<Project> UpdateProjectAsync(Project project);
+        Task DeleteProjectAsync(int projectId);
     }
 }

@@ -10,6 +10,7 @@ namespace BugTracker.Infrastructure.Context.ApplicationDbContext
         }
 
         public DbSet<Project> Project { get; set; }
+        public DbSet<ProjectUser> ProjectUser { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

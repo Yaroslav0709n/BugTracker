@@ -30,7 +30,8 @@ registrationForm.addEventListener('submit', (event) => {
       firstName: formData.get('firstname'),
       lastName: formData.get('lastname'),
       email: formData.get('email'),
-      password: formData.get('password')
+      password: formData.get('password'),
+      role: formData.get('role')
     })
   })
   .then(response => {

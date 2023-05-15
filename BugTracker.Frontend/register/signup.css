@@ -34,7 +34,13 @@ input[type="lastname"]
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
+input,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
 button[type="submit"] {
     display: block;
     margin-top: 20px;

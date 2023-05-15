@@ -1,4 +1,4 @@
-﻿namespace BugTracker.Application.Dtos
+﻿namespace BugTracker.Application.Dtos.Project
 {
     public class ProjectDto
     {

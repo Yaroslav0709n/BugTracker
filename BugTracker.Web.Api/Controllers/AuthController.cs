@@ -38,6 +38,7 @@ namespace BugTracker.Web.Api.Controllers
                 LastName = registerDto.LastName,
                 UserName = registerDto.Email,
                 Email = registerDto.Email,
+                Role = registerDto.Role
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -73,6 +74,7 @@ namespace BugTracker.Web.Api.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
+                Role = user.Role,
                 Token = _tokenService.CreateToken(user)
             };
         }

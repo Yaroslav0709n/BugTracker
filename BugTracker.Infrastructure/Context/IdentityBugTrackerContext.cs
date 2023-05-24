@@ -1,6 +1,8 @@
-﻿using BugTracker.Domain.Entities.Identity;
+﻿using BugTracker.Domain.Entities;
+using BugTracker.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BugTracker.Infrastructure.Context
 {
@@ -9,9 +11,9 @@ namespace BugTracker.Infrastructure.Context
         public IdentityBugTrackerContext(DbContextOptions<IdentityBugTrackerContext> options) : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

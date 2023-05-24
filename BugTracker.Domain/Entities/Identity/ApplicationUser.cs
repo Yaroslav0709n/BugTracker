@@ -10,5 +10,8 @@ namespace BugTracker.Domain.Entities.Identity
         public string LastName { get; set; }
         public string Role { get; set; }
         public ICollection<ProjectUser> ProjectUser { get; set; }
+        public ICollection<TicketUser> TicketUser { get; set; }
+        public ICollection<Ticket> Ticket { get; set; }
+
     }
 }

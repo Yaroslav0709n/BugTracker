@@ -12,7 +12,8 @@ namespace BugTracker.Domain.Entities
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
 
-        public ICollection<ProjectUser> ProjectUsers { get; set; }
+        public ICollection<ProjectUser> ProjectUser { get; set; }
+        public ICollection<Ticket> Ticket { get; set; }
 
     }
 }

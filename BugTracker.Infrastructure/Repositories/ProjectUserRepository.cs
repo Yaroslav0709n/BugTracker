@@ -27,15 +27,15 @@ namespace BugTracker.Infrastructure.Repositories
         public async Task<IEnumerable<ApplicationUser>> GetAllProjectsUserAsync(int projectId)
         {
             return await _context.ProjectUser
-                .Where(x => x.ProjectId == projectId)
-                .Select(x => x.ApplicationUser)
-                .ToListAsync();
+                        .Where(x => x.ProjectId == projectId)
+                        .Select(x => x.ApplicationUser)
+                        .ToListAsync();
         }
 
         public async Task<IEnumerable<ApplicationUser>> GetNonProjectsUserAsync(int projectId)
         {
-            var projectUserIds = await _context.ProjectUser.Where(pu => pu.ProjectId == projectId).Select(pu => pu.ApplicationUserId).ToListAsync();
-            var nonProjectUsers = await _identityContext.Users.Where(u => !projectUserIds.Contains(u.Id)).ToListAsync();
+            var projectUserIds = await _context.ProjectUser.Where(x => x.ProjectId == projectId).Select(x => x.ApplicationUserId).ToListAsync();
+            var nonProjectUsers = await _identityContext.Users.Where(x => !projectUserIds.Contains(x.Id)).ToListAsync();
             return nonProjectUsers;
         }
 

@@ -56,7 +56,7 @@ namespace BugTracker.Infrastructure.Repositories
 
         public async Task<Project> UpdateProjectAsync(Project project)
         {
-            await _context.Project.FindAsync(project.Id);
+            _context.Project.Update(project);
             await _context.SaveChangesAsync();
             return project;
         }

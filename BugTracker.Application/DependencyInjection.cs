@@ -7,7 +7,6 @@ namespace BugTracker.Application
         public static IServiceCollection AddAplication(this IServiceCollection services)
         {
             var assembly = typeof(DependencyInjection).Assembly;
-
             return services;
         }
     }

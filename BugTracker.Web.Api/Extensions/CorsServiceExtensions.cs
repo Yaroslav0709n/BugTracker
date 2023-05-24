@@ -1,4 +1,7 @@
-﻿namespace BugTracker.Web.Api.Extensions
+﻿using FluentValidation.AspNetCore;
+using System.Reflection;
+
+namespace BugTracker.Web.Api.Extensions
 {
     public static class CorsServiceExtensions
     {
@@ -15,6 +18,7 @@
                 });
             });
 
+    
             return services;
         }
     }

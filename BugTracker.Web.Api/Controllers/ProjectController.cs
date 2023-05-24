@@ -17,12 +17,12 @@ namespace BugTracker.Web.Api.Controllers
         }
 
         [HttpPost, Authorize(Roles = "Project Manager")]
-        public async Task<ActionResult> AddProject(ProjectDto projectDto, string userId)
+        public async Task<ActionResult> AddProject([FromBody] ProjectDto projectDto, string userId)
         {
             await _projectService.CreateProject(projectDto, userId);
             return Ok(projectDto);
         }
-
+        
         [HttpGet("user/{userId}")]
         public async Task<ActionResult> GetAllProjectsByUserId(string userId)
         {
@@ -37,14 +37,14 @@ namespace BugTracker.Web.Api.Controllers
             return Ok(project);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateProjectById(int projectId, UpdateProjectDto projectDto)
+       [HttpPut, Authorize(Roles = "Project Manager")]
+        public async Task<ActionResult> UpdateProjectById(int projectId, [FromBody] UpdateProjectDto projectDto)
         {
             var updatedProject = await _projectService.UpdateProject(projectId, projectDto);
             return Ok(updatedProject);
         }
 
-        [HttpDelete] 
+        [HttpDelete, Authorize(Roles = "Project Manager")] 
         public async Task<ActionResult> DeleteProjectById(int projectId)
         {
             await _projectService.DeleteProject(projectId);

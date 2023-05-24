@@ -14,14 +14,11 @@ namespace BugTracker.Web.Api.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
-        private readonly IdentityBugTrackerContext _context;
         public AuthController(UserManager<ApplicationUser> userManager,
-                              ITokenService tokenService,
-                              IdentityBugTrackerContext context)
+                              ITokenService tokenService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
-            _context = context;
         }
 
         [HttpPost]

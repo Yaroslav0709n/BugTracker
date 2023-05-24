@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BugTracker.Infrastructure.Migrations
 {
-    public partial class AuthContext : Migration
+    public partial class ApplicationContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

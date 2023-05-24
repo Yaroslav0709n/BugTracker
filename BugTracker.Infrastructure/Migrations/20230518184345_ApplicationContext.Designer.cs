@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityBugTrackerContext))]
-    [Migration("20230510155450_AuthContext")]
-    partial class AuthContext
+    [Migration("20230518184345_ApplicationContext")]
+    partial class ApplicationContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -294,7 +294,7 @@ namespace BugTracker.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("BugTracker.Domain.Entities.Project", "Project")
-                        .WithMany("ProjectUsers")
+                        .WithMany("ProjectUser")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -362,7 +362,7 @@ namespace BugTracker.Infrastructure.Migrations
 
             modelBuilder.Entity("BugTracker.Domain.Entities.Project", b =>
                 {
-                    b.Navigation("ProjectUsers");
+                    b.Navigation("ProjectUser");
                 });
 #pragma warning restore 612, 618
         }

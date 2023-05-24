@@ -27,18 +27,23 @@ namespace BugTracker.Application.Services
             await _projectUserRepository.CreateUserProjectAsync(addProjectUser);
         }
 
-
         public Task RemoveFromProject(string userId, int projectId)
         {
             return _projectUserRepository.RemoveFromProjectAsync(userId, projectId);
         }
 
-        public async Task<IEnumerable<UsersProjectsDto>> GetAllProjectsUser(int projectId)
+        /*
+            GetAllProjectUsers - users who are in the project
+        */
+        public async Task<IEnumerable<UsersProjectsDto>> GetAllProjectUsers(int projectId)
         {
             var users = await _projectUserRepository.GetAllProjectsUserAsync(projectId);
             return _mapper.Map<IEnumerable<UsersProjectsDto>>(users);
         }
 
+        /*
+            GetNonProjectUsers - users who are not in the project
+        */
         public async Task<IEnumerable<UsersProjectsDto>> GetNonProjectUsers(int projectId)
         {
             var users = await _projectUserRepository.GetNonProjectsUserAsync(projectId);

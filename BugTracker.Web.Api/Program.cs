@@ -1,21 +1,16 @@
 using BugTracker.Application;
-using BugTracker.Application.IServices;
-using BugTracker.Application.Services;
-using BugTracker.Infrastructure;
-using BugTracker.Infrastructure.Context;
 using BugTracker.Web.Api.Extensions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Logging;
 using BugTracker.Application.Mappings;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+}).AddFluentValidation();
 
 builder.Services.AddAplication().AddInfrastructure();
 
@@ -25,6 +20,7 @@ builder.Services.AddCorsService();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenService();
 builder.Services.AddApplicationService();
+builder.Services.AddValidationService();
 builder.Services.AddAutoMapper(typeof(ProjectMapper).Assembly);
 
 var app = builder.Build();

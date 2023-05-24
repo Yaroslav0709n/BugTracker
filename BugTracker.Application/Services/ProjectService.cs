@@ -47,11 +47,10 @@ namespace BugTracker.Application.Services
         {
             var existProject = await _projectRepository.GetProjectAsync(projectId);
 
-            var project = _mapper.Map<Project>(projectDto);
             existProject.Name = projectDto.Name;
             existProject.Description = projectDto.Description;
             existProject.UpdateTime = DateTime.Now;
-            var updatedProject = await _projectRepository.UpdateProjectAsync(project);
+            var updatedProject = await _projectRepository.UpdateProjectAsync(existProject);
 
             return _mapper.Map<UpdateProjectDto>(updatedProject);
 

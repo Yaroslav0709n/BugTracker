@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
-using BugTracker.Application.Dtos.Project;
 using BugTracker.Application.Dtos.Ticket;
 using BugTracker.Application.IServices;
+using BugTracker.Application.ValidationExtensions;
 using BugTracker.Domain.Entities;
 using BugTracker.Domain.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugTracker.Application.Services
 {
@@ -37,15 +32,22 @@ namespace BugTracker.Application.Services
         public async Task<IEnumerable<UsersTicketsDto>> GetAllTicketUsers(int ticketId)
         {
             var users = await _ticketUserRepository.GetAllTicketsUserAsync(ticketId);
+
+            users.ThrowIfNull(nameof(users));
+
             return _mapper.Map<IEnumerable<UsersTicketsDto>>(users);
         }
 
         /*
             GetNonTicketUsers - users who are not execute the ticket
         */
-        public async Task<IEnumerable<UsersTicketsDto>> GetNonTicketUsers(int ticketId)
+        public async Task<IEnumerable<UsersTicketsDto>> GetNonTicketUsers(int projectId, int ticketId)
         {
-            var nonUsers = await _ticketUserRepository.GetNonTicketsUserAsync(ticketId);
+            var nonUsers = await _ticketUserRepository.GetNonTicketsUserAsync(projectId, ticketId);
+
+            nonUsers.ThrowIfNull(nameof(nonUsers));
+
+
             return _mapper.Map<IEnumerable<UsersTicketsDto>>(nonUsers);
         }
 

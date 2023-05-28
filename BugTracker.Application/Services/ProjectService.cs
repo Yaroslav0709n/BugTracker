@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BugTracker.Application.Dtos.Project;
 using BugTracker.Application.IServices;
+using BugTracker.Application.ValidationExtensions;
 using BugTracker.Domain.Entities;
 using BugTracker.Domain.IRepositories;
 
@@ -18,6 +19,8 @@ namespace BugTracker.Application.Services
 
         public async Task<Project> CreateProject(ProjectDto projectDto, string userId)
         {
+            projectDto.ThrowIfNull(nameof(projectDto));
+
             var project = _mapper.Map<Project>(projectDto);
 
             project.CreateTime = DateTime.Now;
@@ -34,18 +37,28 @@ namespace BugTracker.Application.Services
         public async Task<IEnumerable<ProjectDto>> GetAllProjects(string userId)
         {
             var projects = await _projectRepository.GetAllProjectsAsync(userId);
+
+            projects.ThrowIfNull(nameof(projects));
+
             return _mapper.Map<IEnumerable<ProjectDto>>(projects);
         }
 
         public async Task<ProjectDto> GetProject(int projectId)
         {
             var project = await _projectRepository.GetProjectAsync(projectId);
+
+            project.ThrowIfNull(nameof(project));
+
             return _mapper.Map<ProjectDto>(project);
         }
 
         public async Task<UpdateProjectDto> UpdateProject(int projectId, UpdateProjectDto projectDto)
         {
+            projectDto.ThrowIfNull(nameof(projectDto));
+
             var existProject = await _projectRepository.GetProjectAsync(projectId);
+
+            existProject.ThrowIfNull(nameof(existProject));
 
             existProject.Name = projectDto.Name;
             existProject.Description = projectDto.Description;
@@ -53,7 +66,6 @@ namespace BugTracker.Application.Services
             var updatedProject = await _projectRepository.UpdateProjectAsync(existProject);
 
             return _mapper.Map<UpdateProjectDto>(updatedProject);
-
         }
     }
 }

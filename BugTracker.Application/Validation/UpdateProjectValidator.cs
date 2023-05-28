@@ -3,16 +3,16 @@ using FluentValidation;
 
 namespace BugTracker.Application.Validation
 {
-    public class ProjectValidator : AbstractValidator<ProjectDto>
+    public class UpdateProjectValidator: AbstractValidator<UpdateProjectDto>
     {
-        public ProjectValidator()
+        public UpdateProjectValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .WithMessage("'Name' must be filled.")
                 .MaximumLength(40)
                 .WithMessage("'Name' must be no longer than 40 characters");
-
+            
             RuleFor(x => x.Description)
                 .NotEmpty()
                 .WithMessage("'Description' must be filled.")

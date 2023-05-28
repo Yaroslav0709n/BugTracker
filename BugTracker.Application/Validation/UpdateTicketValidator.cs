@@ -1,18 +1,18 @@
-﻿using BugTracker.Application.Dtos.Project;
+﻿using BugTracker.Application.Dtos.Ticket;
 using FluentValidation;
 
 namespace BugTracker.Application.Validation
 {
-    public class ProjectValidator : AbstractValidator<ProjectDto>
+    public class UpdateTicketValidator:AbstractValidator<UpdateTicketDto>
     {
-        public ProjectValidator()
+        public UpdateTicketValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.Title)
                 .NotEmpty()
-                .WithMessage("'Name' must be filled.")
+                .WithMessage("'Title' must be filled.")
                 .MaximumLength(40)
-                .WithMessage("'Name' must be no longer than 40 characters");
-
+                .WithMessage("'Title' must be no longer than 40 characters");
+            
             RuleFor(x => x.Description)
                 .NotEmpty()
                 .WithMessage("'Description' must be filled.")

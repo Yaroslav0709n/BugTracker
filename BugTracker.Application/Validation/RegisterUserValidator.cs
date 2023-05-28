@@ -1,10 +1,5 @@
 ﻿using BugTracker.Application.Dtos.User;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugTracker.Application.Validation
 {
@@ -13,9 +8,23 @@ namespace BugTracker.Application.Validation
         public RegisterUserValidator() 
         {
             RuleFor(register => register.Email).EmailAddress();
-            RuleFor(register => register.FirstName).NotEmpty().MinimumLength(1).MaximumLength(250);
-            RuleFor(register => register.LastName).NotEmpty().MinimumLength(1).MaximumLength(250);
-            RuleFor(register => register.Password).NotEmpty().MinimumLength(6)
+
+            RuleFor(register => register.FirstName)
+                .NotEmpty()
+                .WithMessage("'First name' must be filled.")
+                .MinimumLength(1)
+                .MaximumLength(250);
+            
+            RuleFor(register => register.LastName)
+                .NotEmpty()
+                .WithMessage("'Last name' must be filled.")
+                .MinimumLength(1)
+                .MaximumLength(250);
+            
+            RuleFor(register => register.Password)
+                .NotEmpty()
+                .WithMessage("'Password' must be filled.")
+                .MinimumLength(6)
                 .WithMessage("'Password' must be at least 6 characters long");
         }
     }

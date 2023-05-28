@@ -1,9 +1,4 @@
 ﻿using BugTracker.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugTracker.Application.Dtos.Ticket
 {
@@ -16,5 +11,6 @@ namespace BugTracker.Application.Dtos.Ticket
         public Priorities Priority { get; set; }
         public Statuses Status { get; set; }
         public Types Type { get; set; }
+        public string CreatedUserName { get; set; }
     }
 }

@@ -21,6 +21,8 @@ namespace BugTracker.Web.Api.Extensions
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<ITicketUserService, TicketUserService>();
             services.AddScoped<ITicketUserRepository, TicketUserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

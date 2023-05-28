@@ -1,4 +1,5 @@
 ﻿using BugTracker.Application.Dtos.Project;
+using BugTracker.Application.Dtos.Ticket;
 using BugTracker.Application.Dtos.User;
 using BugTracker.Application.Validation;
 using FluentValidation;
@@ -11,6 +12,9 @@ namespace BugTracker.Web.Api.Extensions
         {
             services.AddTransient<IValidator<RegisterDto>, RegisterUserValidator>();
             services.AddTransient<IValidator<ProjectDto>, ProjectValidator>();
+            services.AddTransient<IValidator<UpdateProjectDto>, UpdateProjectValidator>();
+            services.AddTransient<IValidator<AddTicketDto>, AddTicketValidator>();
+            services.AddTransient<IValidator<UpdateTicketDto>, UpdateTicketValidator>();
 
             return services;
         }

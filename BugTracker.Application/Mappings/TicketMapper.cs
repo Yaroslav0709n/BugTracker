@@ -23,6 +23,9 @@ namespace BugTracker.Application.Mappings
 
             CreateMap<ApplicationUser, UsersTicketsDto>();
             CreateMap<UsersTicketsDto, ApplicationUser>();
+
+            CreateMap<UsersTicketsDto, TicketUser>();
+            CreateMap<TicketUser, UsersTicketsDto>();
         }
     }
 }

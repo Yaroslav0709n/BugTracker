@@ -4,22 +4,16 @@ using BugTracker.Domain.IRepositories;
 using BugTracker.Infrastructure.Context;
 using BugTracker.Infrastructure.Context.ApplicationDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugTracker.Infrastructure.Repositories
 {
     public class TicketUserRepository : ITicketUserRepository
     {
         private readonly ApplicationContext _context;
-        private readonly IdentityBugTrackerContext _identityContext;
-        public TicketUserRepository(ApplicationContext context, IdentityBugTrackerContext identityBugTrackerContext)
+        public TicketUserRepository(ApplicationContext context)
         {
             _context = context;
-            _identityContext = identityBugTrackerContext;
         }
         public async Task<TicketUser> CreateUserTicketAsync(TicketUser userTicket)
         {
@@ -36,11 +30,20 @@ namespace BugTracker.Infrastructure.Repositories
                         .ToListAsync();
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetNonTicketsUserAsync(int ticketId)
+        public async Task<IEnumerable<ApplicationUser>> GetNonTicketsUserAsync(int projectId, int ticketId)
         {
-            var ticketUsersByIds = await _context.TicketUser.Where(x => x.TicketId == ticketId).Select(x =>x.ApplicationUserId).ToListAsync();
-            var nonTicketUsers = await _identityContext.Users.Where(x => !ticketUsersByIds.Contains(x.Id)).ToListAsync(); 
-            return nonTicketUsers;
+            var ticketUsersByIds = await _context.TicketUser
+                                   .Where(x => x.TicketId == ticketId)
+                                   .Select(x =>x.ApplicationUserId)
+                                   .ToListAsync();
+            
+            var projectUsersByIds = await _context.ProjectUser
+                                    .Where(x => x.ProjectId == projectId)
+                                    .Select(x => x.ApplicationUser)
+                                    .Where(x => !ticketUsersByIds.Contains(x.Id))
+                                    .ToListAsync();
+
+            return projectUsersByIds;
         }
 
         public async Task RemoveFromTicketAsync(string userId, int ticketId)

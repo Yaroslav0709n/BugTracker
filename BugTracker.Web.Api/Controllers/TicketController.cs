@@ -1,6 +1,5 @@
 ﻿using BugTracker.Application.Dtos.Ticket;
 using BugTracker.Application.IServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugTracker.Web.Api.Controllers
@@ -47,7 +46,7 @@ namespace BugTracker.Web.Api.Controllers
         public async Task<ActionResult> DeleteProjectById(int ticketId)
         {
             await _ticketService.DeleteTicket(ticketId);
-            return Ok("Delete complete");
+            return Ok(true);
         }
     }
 }

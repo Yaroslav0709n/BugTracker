@@ -1,5 +1,4 @@
 ﻿using BugTracker.Application.IServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugTracker.Web.Api.Controllers
@@ -29,9 +28,9 @@ namespace BugTracker.Web.Api.Controllers
         }
         
         [HttpGet("{ticketId}")]
-        public async Task<ActionResult> GetNonTicketUsersById(int ticketId)
+        public async Task<ActionResult> GetNonTicketUsersById(int projectId, int ticketId)
         {
-            var nonTicketUsers = await _ticketUserService.GetNonTicketUsers(ticketId);
+            var nonTicketUsers = await _ticketUserService.GetNonTicketUsers(projectId, ticketId);
             return Ok(nonTicketUsers);
         }
 
@@ -41,8 +40,6 @@ namespace BugTracker.Web.Api.Controllers
             await _ticketUserService.RemoveFromTicket(userId, ticketId);
             return Ok(true);
         }
-
-
 
     }
 }

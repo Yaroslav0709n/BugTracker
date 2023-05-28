@@ -48,7 +48,7 @@ namespace BugTracker.Web.Api.Controllers
         public async Task<ActionResult> DeleteProjectById(int projectId)
         {
             await _projectService.DeleteProject(projectId);
-            return Ok("Delete complete");
+            return Ok(true);
         }
         
     }

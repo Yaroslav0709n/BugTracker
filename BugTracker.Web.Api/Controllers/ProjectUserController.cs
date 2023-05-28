@@ -19,7 +19,7 @@ namespace BugTracker.Web.Api.Controllers
         public async Task<ActionResult> CreateUserProject(string userId, int projectId)
         {
             await _userProjectService.AddUserProject(userId, projectId);
-            return Ok("Create complete");
+            return Ok(true);
         }
 
         [HttpGet]
@@ -33,7 +33,7 @@ namespace BugTracker.Web.Api.Controllers
         public async Task<ActionResult> RemoveUserFromProject(string userId, int projectId)
         {
             await _userProjectService.RemoveFromProject(userId, projectId);
-            return Ok("User removed from project");
+            return Ok(true);
         }
 
         [HttpGet("{projectId}"), Authorize(Roles = "Project Manager")]

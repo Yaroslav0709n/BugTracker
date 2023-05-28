@@ -47,13 +47,13 @@ namespace BugTracker.Web.Api.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            return Ok("Sign up complete");
+            return Ok(true);
         }
 
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<AuthUserDto>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
@@ -66,7 +66,7 @@ namespace BugTracker.Web.Api.Controllers
                 return BadRequest(new { message = "Invalid password" });
             }
 
-            return new UserDto
+            return new AuthUserDto
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,

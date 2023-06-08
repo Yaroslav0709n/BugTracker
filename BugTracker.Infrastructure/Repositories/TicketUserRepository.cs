@@ -10,8 +10,8 @@ namespace BugTracker.Infrastructure.Repositories
 {
     public class TicketUserRepository : ITicketUserRepository
     {
-        private readonly ApplicationContext _context;
-        public TicketUserRepository(ApplicationContext context)
+        private readonly BugTrackerContext _context;
+        public TicketUserRepository(BugTrackerContext context)
         {
             _context = context;
         }

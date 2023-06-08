@@ -7,16 +7,13 @@ namespace BugTracker.Infrastructure.Repositories
 {
     public class TicketRepository : ITicketRepository
     {
-        private readonly ApplicationContext _context;
-        public TicketRepository(ApplicationContext context)
+        private readonly BugTrackerContext _context;
+        public TicketRepository(BugTrackerContext context)
         {
             _context = context;
         }
-        public async Task<Ticket> AddTicketAsync(Ticket ticket, string userId, int projectId)
+        public async Task<Ticket> AddTicketAsync(Ticket ticket, string userId)
         {
-            ticket.CreatedByUserId = userId;
-            ticket.ProjectId = projectId;
-
             await _context.Ticket.AddAsync(ticket);
             await _context.SaveChangesAsync();
 
@@ -25,6 +22,7 @@ namespace BugTracker.Infrastructure.Repositories
                 TicketId = ticket.Id,
                 ApplicationUserId = userId
             };
+
             await _context.TicketUser.AddAsync(ticketUser);
             await _context.SaveChangesAsync();
 
@@ -34,15 +32,18 @@ namespace BugTracker.Infrastructure.Repositories
         public async Task DeleteTicketAsync(int ticketId)
         {
             var ticket = await _context.Ticket.FindAsync(ticketId);
-            var ticketUser = await _context.TicketUser.FirstOrDefaultAsync(x =>x.TicketId == ticketId); 
-            _context.Ticket.Remove(ticket);
-            _context.TicketUser.Remove(ticketUser);
+
+            if(ticket != null)
+                _context.Ticket.Remove(ticket);
+            
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Ticket>> GetAllTicketsAsync(int projectId)
         {
-            return _context.Ticket.Where(x => x.ProjectId == projectId).ToList();
+            return await _context.Ticket
+                .Where(x => x.ProjectId == projectId)
+                .ToListAsync();
         }
 
         public async Task<Ticket> GetTicketAsync(int ticketId)

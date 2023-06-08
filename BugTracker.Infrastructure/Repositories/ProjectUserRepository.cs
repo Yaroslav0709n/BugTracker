@@ -9,9 +9,9 @@ namespace BugTracker.Infrastructure.Repositories
 {
     public class ProjectUserRepository : IProjectUserRepository
     {
-        private readonly ApplicationContext _context;
+        private readonly BugTrackerContext _context;
         private readonly IdentityBugTrackerContext _identityContext;
-        public ProjectUserRepository(ApplicationContext context, IdentityBugTrackerContext identityBugTrackerContext)
+        public ProjectUserRepository(BugTrackerContext context, IdentityBugTrackerContext identityBugTrackerContext)
         {
             _context = context;
             _identityContext = identityBugTrackerContext;
@@ -27,6 +27,7 @@ namespace BugTracker.Infrastructure.Repositories
         public async Task<IEnumerable<ApplicationUser>> GetAllProjectsUserAsync(int projectId)
         {
             return await _context.ProjectUser
+                        .Include(x => x.ApplicationUser)
                         .Where(x => x.ProjectId == projectId)
                         .Select(x => x.ApplicationUser)
                         .ToListAsync();

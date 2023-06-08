@@ -7,8 +7,8 @@ namespace BugTracker.Infrastructure.Repositories
 {
     public class ProjectRepository : IProjectRepository
     {
-        private readonly ApplicationContext _context;
-        public ProjectRepository(ApplicationContext context)
+        private readonly BugTrackerContext _context;
+        public ProjectRepository(BugTrackerContext context)
         {
             _context = context;
         }
@@ -32,18 +32,17 @@ namespace BugTracker.Infrastructure.Repositories
         public async Task DeleteProjectAsync(int projectId)
         {
             var project = await _context.Project.FindAsync(projectId);
-            var projectUser = await _context.ProjectUser.FirstOrDefaultAsync(x => x.ProjectId == projectId);
-            _context.Project.Remove(project);
-            if(projectUser !=  null) 
-            {
-                _context.ProjectUser.Remove(projectUser);
-            }
+            
+            if (project != null)
+                _context.Project.Remove(project);
+
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Project>> GetAllProjectsAsync(string userId)
         {
             return await _context.ProjectUser
+                .Include(pu => pu.Project)
                 .Where(pu => pu.ApplicationUserId == userId)
                 .Select(pu => pu.Project)
                 .ToListAsync();

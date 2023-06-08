@@ -22,6 +22,9 @@ builder.Services.AddSwaggerGenService();
 builder.Services.AddApplicationService();
 builder.Services.AddValidationService();
 builder.Services.AddAutoMapper(typeof(ProjectMapper).Assembly);
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpContextAccessor();
+
 
 var app = builder.Build();
 
@@ -32,14 +35,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//app.UseCustomExceptionHandler();
 app.UseCors("MyPolicy");
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

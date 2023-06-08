@@ -12,7 +12,7 @@ namespace BugTracker.Application.Validation
                 .WithMessage("'Title' must be filled.")
                 .MaximumLength(40)
                 .WithMessage("'Title' must be no longer than 40 characters");
-            
+
             RuleFor(x => x.Description)
                 .NotEmpty()
                 .WithMessage("'Description' must be filled.")

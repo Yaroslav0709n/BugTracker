@@ -12,13 +12,11 @@ namespace BugTracker.Application.Validation
             RuleFor(register => register.FirstName)
                 .NotEmpty()
                 .WithMessage("'First name' must be filled.")
-                .MinimumLength(1)
                 .MaximumLength(250);
             
             RuleFor(register => register.LastName)
                 .NotEmpty()
                 .WithMessage("'Last name' must be filled.")
-                .MinimumLength(1)
                 .MaximumLength(250);
             
             RuleFor(register => register.Password)

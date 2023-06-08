@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BugTracker.Application.Dtos.User;
+using BugTracker.Application.Extensions;
 using BugTracker.Application.IServices;
 using BugTracker.Application.ValidationExtensions;
 using BugTracker.Domain.IRepositories;
+using Microsoft.AspNetCore.Http;
 
 namespace BugTracker.Application.Services
 {
@@ -10,10 +12,16 @@ namespace BugTracker.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public UserService(IUserRepository userRepository, 
+                           IMapper mapper,
+                           IHttpContextAccessor contextAccessor)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _contextAccessor = contextAccessor;
+
         }
         public async Task<UserDto> GetUser(string userId)
         {
@@ -24,8 +32,10 @@ namespace BugTracker.Application.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<UpdateUserDto> UpdateUser(UpdateUserDto updateUserDto, string userId)
+        public async Task<UpdateUserDto> UpdateUser(UpdateUserDto updateUserDto)
         {
+            var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();
+
             updateUserDto.ThrowIfNull(nameof(updateUserDto));
 
             var existUser = await _userRepository.GetUserAsync(userId);

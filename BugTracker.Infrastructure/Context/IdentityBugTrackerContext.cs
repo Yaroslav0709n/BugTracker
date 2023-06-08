@@ -1,8 +1,6 @@
-﻿using BugTracker.Domain.Entities;
-using BugTracker.Domain.Entities.Identity;
+﻿using BugTracker.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace BugTracker.Infrastructure.Context
 {

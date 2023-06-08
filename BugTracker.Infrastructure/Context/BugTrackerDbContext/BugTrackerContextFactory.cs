@@ -6,9 +6,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace BugTracker.Infrastructure.Context.ApplicationDbContext
 {
-    public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
+    public class BugTrackerContextFactory : IDesignTimeDbContextFactory<BugTrackerContext>
     {
-        public ApplicationContext CreateDbContext(string[] args)
+        public BugTrackerContext CreateDbContext(string[] args)
         {
             var host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((context, configuration) =>
@@ -17,14 +17,14 @@ namespace BugTracker.Infrastructure.Context.ApplicationDbContext
                 })
                 .Build();
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<BugTrackerContext>();
 
             var configuration = host.Services.GetRequiredService<IConfiguration>();
             var connectionString = configuration.GetConnectionString("MSSQL");
 
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new ApplicationContext(optionsBuilder.Options);
+            return new BugTrackerContext(optionsBuilder.Options);
         }
     }
 }

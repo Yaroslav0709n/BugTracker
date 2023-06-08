@@ -1,13 +1,11 @@
 ﻿using BugTracker.Domain.Entities;
-using BugTracker.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace BugTracker.Infrastructure.Context.ApplicationDbContext
 {
-    public class ApplicationContext:DbContext
+    public class BugTrackerContext:DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options):base(options)   
+        public BugTrackerContext(DbContextOptions<BugTrackerContext> options):base(options)   
         {
         }
 
@@ -15,11 +13,11 @@ namespace BugTracker.Infrastructure.Context.ApplicationDbContext
         public DbSet<ProjectUser> ProjectUser { get; set; }
         public DbSet<Ticket> Ticket { get; set; }
         public DbSet<TicketUser> TicketUser { get; set; }
+        public DbSet<Commentary> Commentary { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

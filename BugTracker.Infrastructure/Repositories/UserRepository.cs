@@ -1,8 +1,6 @@
 ﻿using BugTracker.Domain.Entities.Identity;
 using BugTracker.Domain.IRepositories;
 using BugTracker.Infrastructure.Context;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
 
 namespace BugTracker.Infrastructure.Repositories
 {
@@ -21,11 +19,6 @@ namespace BugTracker.Infrastructure.Repositories
 
         public async Task<ApplicationUser> UpdateUserDataAsync(ApplicationUser user)
         {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
-
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return user;

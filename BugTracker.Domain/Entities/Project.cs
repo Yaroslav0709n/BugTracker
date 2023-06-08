@@ -1,8 +1,4 @@
-﻿using BugTracker.Domain.Entities.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BugTracker.Domain.Entities
+﻿namespace BugTracker.Domain.Entities
 {
     public class Project
     {

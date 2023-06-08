@@ -20,6 +20,7 @@ namespace BugTracker.Domain.Entities
         public ApplicationUser CreatedByUser { get; set; }
 
         public ICollection<TicketUser> TicketUser { get; set; }
+        public ICollection<Commentary> Commentary { get; set; }
 
     }
 }

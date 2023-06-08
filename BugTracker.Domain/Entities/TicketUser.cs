@@ -8,8 +8,6 @@ namespace BugTracker.Domain.Entities
         public int Id { get; set; }
 
         public int TicketId { get; set; }
-
-        [ForeignKey("TicketId")]
         public Ticket Ticket { get; set; }
 
         public string ApplicationUserId { get; set; }

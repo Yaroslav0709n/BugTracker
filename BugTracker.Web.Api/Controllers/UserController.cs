@@ -23,10 +23,10 @@ namespace BugTracker.Web.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateUserById([FromBody] UpdateUserDto updateUserDto, string userId)
+        public async Task<ActionResult> UpdateUserById([FromBody] UpdateUserDto updateUserDto)
         {
-            var updateUser = await _userService.UpdateUser(updateUserDto, userId);
-            return Ok(updateUserDto);
+            var userModel = await _userService.UpdateUser(updateUserDto);
+            return Ok(userModel);
         }
     }
 }

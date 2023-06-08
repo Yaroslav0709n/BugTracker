@@ -23,7 +23,7 @@ namespace BugTracker.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllProjectsUserById(int projectId)
+        public async Task<ActionResult> GetAllProjectUsersById(int projectId)
         {
             var usersProject = await _userProjectService.GetAllProjectUsers(projectId);
             return Ok(usersProject);
@@ -39,8 +39,8 @@ namespace BugTracker.Web.Api.Controllers
         [HttpGet("{projectId}"), Authorize(Roles = "Project Manager")]
         public async Task<ActionResult> GetNonProjectUsersById(int projectId)
         {
-            var nonUserProject = await _userProjectService.GetNonProjectUsers(projectId);
-            return Ok(nonUserProject);
+            var nonUsersProject = await _userProjectService.GetNonProjectUsers(projectId);
+            return Ok(nonUsersProject);
         }
     }
 }

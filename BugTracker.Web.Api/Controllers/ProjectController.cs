@@ -17,31 +17,31 @@ namespace BugTracker.Web.Api.Controllers
         }
 
         [HttpPost, Authorize(Roles = "Project Manager")]
-        public async Task<ActionResult> AddProject([FromBody] ProjectDto projectDto, string userId)
+        public async Task<ActionResult> AddProject([FromBody] ProjectDto createProjectDto)
         {
-            await _projectService.CreateProject(projectDto, userId);
-            return Ok(projectDto);
+            var projectModel = await _projectService.CreateProject(createProjectDto);
+            return Ok(projectModel);
         }
-        
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult> GetAllProjectsByUserId(string userId)
+
+        [HttpGet, Authorize]
+        public async Task<ActionResult> GetAllProjectsByUserId()
         {
-            var allProjects = await _projectService.GetAllProjects(userId);
-            return Ok(allProjects);
+            var projects = await _projectService.GetAllProjects();
+            return Ok(projects);
         }
 
         [HttpGet("project/{projectId}")]
         public async Task<ActionResult> GetProjectById(int projectId)
         {
-            var project = await _projectService.GetProject(projectId);
-            return Ok(project);
+            var projectById = await _projectService.GetProject(projectId);
+            return Ok(projectById);
         }
 
-       [HttpPut, Authorize(Roles = "Project Manager")]
-        public async Task<ActionResult> UpdateProjectById(int projectId, [FromBody] UpdateProjectDto projectDto)
+        [HttpPut, Authorize(Roles = "Project Manager")]
+        public async Task<ActionResult> UpdateProjectById(int projectId, [FromBody] UpdateProjectDto updateProjectDto)
         {
-            var updatedProject = await _projectService.UpdateProject(projectId, projectDto);
-            return Ok(updatedProject);
+            var projectModel = await _projectService.UpdateProject(projectId, updateProjectDto);
+            return Ok(projectModel);
         }
 
         [HttpDelete, Authorize(Roles = "Project Manager")] 

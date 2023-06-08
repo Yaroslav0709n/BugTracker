@@ -1,10 +1,8 @@
 ﻿using BugTracker.Application.Dtos.User;
 using BugTracker.Application.IServices;
 using BugTracker.Domain.Entities.Identity;
-using BugTracker.Infrastructure.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Web.Api.Controllers
 {

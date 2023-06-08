@@ -14,7 +14,7 @@ namespace BugTracker.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllTicketsUserById(int ticketId)
+        public async Task<ActionResult> GetAllTicketUsersById(int ticketId)
         {
             var usersTicket = await _ticketUserService.GetAllTicketUsers(ticketId);
             return Ok(usersTicket);
@@ -30,8 +30,8 @@ namespace BugTracker.Web.Api.Controllers
         [HttpGet("{ticketId}")]
         public async Task<ActionResult> GetNonTicketUsersById(int projectId, int ticketId)
         {
-            var nonTicketUsers = await _ticketUserService.GetNonTicketUsers(projectId, ticketId);
-            return Ok(nonTicketUsers);
+            var nonUsersTicket = await _ticketUserService.GetNonTicketUsers(projectId, ticketId);
+            return Ok(nonUsersTicket);
         }
 
         [HttpDelete]

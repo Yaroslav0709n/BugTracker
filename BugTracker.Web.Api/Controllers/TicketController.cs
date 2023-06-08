@@ -17,8 +17,8 @@ namespace BugTracker.Web.Api.Controllers
         [HttpGet("project/{projectId}")]
         public async Task<ActionResult> GetAllTicketsByProjectId(int projectId)
         {
-            var allTickets = await _ticketService.GetAllTickets(projectId);
-            return Ok(allTickets);
+            var tickets = await _ticketService.GetAllTickets(projectId);
+            return Ok(tickets);
         }
 
         [HttpGet("ticket/{ticketId}")]
@@ -29,17 +29,17 @@ namespace BugTracker.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddTicket([FromBody] AddTicketDto ticketDto, string userId, int projectId)
+        public async Task<ActionResult> AddTicket([FromBody] CreateTicketDto createTicketDto, int projectId)
         {
-            await _ticketService.CreateTicket(ticketDto, userId, projectId);
-            return Ok(ticketDto);
+            var ticketModel = await _ticketService.CreateTicket(createTicketDto, projectId);
+            return Ok(createTicketDto);
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateTicket([FromBody] UpdateTicketDto updateTicketDto, int ticketId)
+        public async Task<ActionResult> UpdateTicketById([FromBody] UpdateTicketDto updateTicketDto, int ticketId)
         {
-            await _ticketService.UpdateTicket(updateTicketDto, ticketId);
-            return Ok(updateTicketDto);
+            var ticketModel = await _ticketService.UpdateTicket(updateTicketDto, ticketId);
+            return Ok(ticketModel);
         }
 
         [HttpDelete]

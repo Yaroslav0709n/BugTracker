@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BugTracker.Application.Dtos.Project;
+using BugTracker.Application.Extensions;
 using BugTracker.Application.IServices;
 using BugTracker.Application.ValidationExtensions;
 using BugTracker.Domain.Entities;
 using BugTracker.Domain.IRepositories;
+using Microsoft.AspNetCore.Http;
 
 namespace BugTracker.Application.Services
 {
@@ -11,22 +13,30 @@ namespace BugTracker.Application.Services
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
-        public ProjectService(IProjectRepository projectRepository, IMapper mapper)
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public ProjectService(IProjectRepository projectRepository, 
+                              IMapper mapper, 
+                              IHttpContextAccessor contextAccessor)
         {
             _projectRepository = projectRepository;
             _mapper = mapper;
+            _contextAccessor = contextAccessor;
         }
 
-        public async Task<Project> CreateProject(ProjectDto projectDto, string userId)
+        public async Task<ProjectDto> CreateProject(ProjectDto projectDto)
         {
+            var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();
+
             projectDto.ThrowIfNull(nameof(projectDto));
 
-            var project = _mapper.Map<Project>(projectDto);
+            var newProject = _mapper.Map<Project>(projectDto);
 
-            project.CreateTime = DateTime.Now;
-            project.UpdateTime = DateTime.Now;
+            newProject.CreateTime = DateTime.Now;
+            newProject.UpdateTime = DateTime.Now;
 
-            return await _projectRepository.AddProject(project, userId);
+            var createdProject = await _projectRepository.AddProject(newProject, userId);
+            return _mapper.Map<ProjectDto>(createdProject);
         }
 
         public Task DeleteProject(int projectId)
@@ -34,8 +44,10 @@ namespace BugTracker.Application.Services
             return _projectRepository.DeleteProjectAsync(projectId);
         }
 
-        public async Task<IEnumerable<ProjectDto>> GetAllProjects(string userId)
+        public async Task<IEnumerable<ProjectDto>> GetAllProjects()
         {
+            var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();
+
             var projects = await _projectRepository.GetAllProjectsAsync(userId);
 
             projects.ThrowIfNull(nameof(projects));
@@ -52,17 +64,18 @@ namespace BugTracker.Application.Services
             return _mapper.Map<ProjectDto>(project);
         }
 
-        public async Task<UpdateProjectDto> UpdateProject(int projectId, UpdateProjectDto projectDto)
+        public async Task<UpdateProjectDto> UpdateProject(int projectId, UpdateProjectDto updateProjectDto)
         {
-            projectDto.ThrowIfNull(nameof(projectDto));
+            updateProjectDto.ThrowIfNull(nameof(updateProjectDto));
 
             var existProject = await _projectRepository.GetProjectAsync(projectId);
 
             existProject.ThrowIfNull(nameof(existProject));
 
-            existProject.Name = projectDto.Name;
-            existProject.Description = projectDto.Description;
+            existProject.Name = updateProjectDto.Name;
+            existProject.Description = updateProjectDto.Description;
             existProject.UpdateTime = DateTime.Now;
+
             var updatedProject = await _projectRepository.UpdateProjectAsync(existProject);
 
             return _mapper.Map<UpdateProjectDto>(updatedProject);

@@ -43,12 +43,12 @@ namespace BugTracker.Application.Services
         */
         public async Task<IEnumerable<UsersTicketsDto>> GetNonTicketUsers(int projectId, int ticketId)
         {
-            var nonUsers = await _ticketUserRepository.GetNonTicketsUserAsync(projectId, ticketId);
+            var users = await _ticketUserRepository.GetNonTicketsUserAsync(projectId, ticketId);
 
-            nonUsers.ThrowIfNull(nameof(nonUsers));
+            users.ThrowIfNull(nameof(users));
 
 
-            return _mapper.Map<IEnumerable<UsersTicketsDto>>(nonUsers);
+            return _mapper.Map<IEnumerable<UsersTicketsDto>>(users);
         }
 
         public async Task RemoveFromTicket(string userId, int ticketId)

@@ -50,11 +50,11 @@ namespace BugTracker.Application.Services
         */
         public async Task<IEnumerable<UsersProjectsDto>> GetNonProjectUsers(int projectId)
         {
-            var nonUsers = await _projectUserRepository.GetNonProjectsUserAsync(projectId);
+            var users = await _projectUserRepository.GetNonProjectsUserAsync(projectId);
 
-            nonUsers.ThrowIfNull(nameof(nonUsers));
+            users.ThrowIfNull(nameof(users));
 
-            return _mapper.Map<IEnumerable<UsersProjectsDto>>(nonUsers);
+            return _mapper.Map<IEnumerable<UsersProjectsDto>>(users);
         }
     }
 }

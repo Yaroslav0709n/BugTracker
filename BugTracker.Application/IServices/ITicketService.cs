@@ -7,7 +7,7 @@ namespace BugTracker.Application.IServices
     {
         Task<IEnumerable<TicketDto>> GetAllTickets(int projectId);
         Task<InfoAboutTicketDto> GetTicket(int ticketId);
-        Task<Ticket> CreateTicket(AddTicketDto ticketDto, string userId, int projectId);
+        Task<Ticket> CreateTicket(CreateTicketDto ticketDto, int projectId);
         Task<UpdateTicketDto> UpdateTicket(UpdateTicketDto ticketDto, int projecttId);
         Task DeleteTicket(int ticketId);
     }

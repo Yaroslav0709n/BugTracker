@@ -9,8 +9,8 @@ namespace BugTracker.Application.Mappings
     {
         public TicketMapper()
         {
-            CreateMap<AddTicketDto, Ticket>();
-            CreateMap<Ticket, AddTicketDto>();
+            CreateMap<CreateTicketDto, Ticket>();
+            CreateMap<Ticket, CreateTicketDto>();
 
             CreateMap<TicketDto, Ticket>();
             CreateMap<Ticket, TicketDto>();

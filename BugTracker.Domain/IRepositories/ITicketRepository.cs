@@ -6,7 +6,7 @@ namespace BugTracker.Domain.IRepositories
     {
         Task<IEnumerable<Ticket>> GetAllTicketsAsync(int projectId);
         Task<Ticket> GetTicketAsync(int ticketId);
-        Task<Ticket> AddTicketAsync(Ticket ticket, string userId, int projectId);
+        Task<Ticket> AddTicketAsync(Ticket ticket, string userId);
         Task<Ticket> UpdateTicketAsync(Ticket ticket);
         Task DeleteTicketAsync(int ticketId);
     }

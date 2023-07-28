@@ -56,16 +56,17 @@ namespace BugTracker.Web.Api.Controllers
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
             {
-                return BadRequest(new { message = "Invalid email" });
+                return BadRequest("Invalid email");
             }
 
             if (!await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
-                return BadRequest(new { message = "Invalid password" });
+                return BadRequest("Invalid password");
             }
 
             return new AuthUserDto
             {
+                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,

@@ -22,7 +22,14 @@ namespace BugTracker.Web.Api.Controllers
             return Ok(true);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
+        public async Task<ActionResult> GetProjectUsersById(int projectId)
+        {
+            var usersProject = await _userProjectService.GetProjectUsers(projectId);
+            return Ok(usersProject);
+        }
+
+        [HttpGet("projectuser/{projectId}"), Authorize]
         public async Task<ActionResult> GetAllProjectUsersById(int projectId)
         {
             var usersProject = await _userProjectService.GetAllProjectUsers(projectId);

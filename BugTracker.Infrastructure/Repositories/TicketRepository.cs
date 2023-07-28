@@ -46,6 +46,15 @@ namespace BugTracker.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Ticket>> GetAllUsersTicketsAsync(string userId)
+        {
+            return await _context.TicketUser
+                .Include(x => x.Ticket)
+                .Where(x => x.ApplicationUserId == userId)
+                .Select(x => x.Ticket)
+                .ToListAsync();
+        }
+
         public async Task<Ticket> GetTicketAsync(int ticketId)
         {
             return await _context.Ticket.FindAsync(ticketId);

@@ -1,6 +1,7 @@
 ﻿using BugTracker.Domain.Entities.Identity;
 using BugTracker.Domain.IRepositories;
 using BugTracker.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Infrastructure.Repositories
 {
@@ -15,6 +16,13 @@ namespace BugTracker.Infrastructure.Repositories
         {
             var user = await _context.Users.FindAsync(userId);
             return user!;
+        }
+
+        public async Task<IEnumerable<ApplicationUser>> GetUsersAsync(string userId)
+        {
+            var users = await _context.Users.ToListAsync();
+            var filteredUsers = users.Where(x => x.Id != userId);
+            return filteredUsers;
         }
 
         public async Task<ApplicationUser> UpdateUserDataAsync(ApplicationUser user)

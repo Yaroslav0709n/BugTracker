@@ -17,6 +17,13 @@ namespace BugTracker.Infrastructure.Repositories
             _identityContext = identityBugTrackerContext;
         }
 
+        public async Task<bool> AddRangeUserProjectAsync(ProjectUser[] userProject)
+        {
+            await _context.ProjectUser.AddRangeAsync(userProject);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<ProjectUser> CreateUserProjectAsync(ProjectUser projectUser)
         {
             await _context.ProjectUser.AddAsync(projectUser);
@@ -24,7 +31,16 @@ namespace BugTracker.Infrastructure.Repositories
             return projectUser;
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetAllProjectsUserAsync(int projectId)
+        public async Task<IEnumerable<ApplicationUser>> GetProjectUsersAsync(int projectId, string userId)
+        {
+            return await _context.ProjectUser
+                        .Include(x => x.ApplicationUser)
+                        .Where(x => x.ApplicationUserId != userId)
+                        .Where(x => x.ProjectId == projectId)
+                        .Select(x => x.ApplicationUser)
+                        .ToListAsync();
+        }
+        public async Task<IEnumerable<ApplicationUser>> GetAllProjectUsersAsync(int projectId)
         {
             return await _context.ProjectUser
                         .Include(x => x.ApplicationUser)
@@ -33,7 +49,7 @@ namespace BugTracker.Infrastructure.Repositories
                         .ToListAsync();
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetNonProjectsUserAsync(int projectId)
+        public async Task<IEnumerable<ApplicationUser>> GetNonProjectUsersAsync(int projectId)
         {
             var projectUserIds = await _context.ProjectUser.Where(x => x.ProjectId == projectId).Select(x => x.ApplicationUserId).ToListAsync();
             var nonProjectUsers = await _identityContext.Users.Where(x => !projectUserIds.Contains(x.Id)).ToListAsync();

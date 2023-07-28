@@ -1,4 +1,4 @@
-﻿using BugTracker.Application.Exception;
+﻿using BugTracker.Application.Common.Exceptions;
 using System.Security.Claims;
 
 namespace BugTracker.Application.Extensions

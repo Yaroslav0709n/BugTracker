@@ -11,7 +11,9 @@ namespace BugTracker.Application.Services
     {
         private readonly ITicketUserRepository _ticketUserRepository;
         private readonly IMapper _mapper;
-        public TicketUserService(ITicketUserRepository ticketUserRepository, IMapper mapper)
+
+        public TicketUserService(ITicketUserRepository ticketUserRepository, 
+                                 IMapper mapper)
         {
             _ticketUserRepository = ticketUserRepository;
             _mapper = mapper;

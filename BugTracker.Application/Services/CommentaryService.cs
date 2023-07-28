@@ -26,29 +26,25 @@ namespace BugTracker.Application.Services
             _mapper = mapper;
             _contextAccessor = contextAccessor;
         }
-        public async Task<AddCommentaryDto> CreateCommentary(string text, int ticketId)
+        public async Task<bool> CreateCommentary(AddCommentaryDto commentDto, int ticketId)
         {
             var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();
-
-            if (text.Length > 1000)
+        
+            if (commentDto.Text.Length > 1000)
                 throw new ArgumentException("'Text' must be no longer than 1000 characters.");
-            else if(text.Length < 1)
-                throw new ArgumentException("'Text'  must be filled.");
+            else if (commentDto.Text.Length < 1)
+                throw new ArgumentException("'Text' must be filled.");
 
-            var fullName = await _userRepository.GetUserAsync(userId);
             var commentary = new Commentary
             {
-                Text = text,
+                Text = commentDto.Text,
                 CreateTime = DateTime.Now,
                 TicketId = ticketId,
                 CreatedByUserId = userId
-            }; 
+            };
 
-            var newComment = await _commentaryRepositories.AddCommentaryAsync(commentary, userId, ticketId);
-
-            var commentaryDto = _mapper.Map<AddCommentaryDto>(newComment);
-            commentaryDto.CreatedUserName = $"{fullName.FirstName} {fullName.LastName}";
-            return commentaryDto;
+            await _commentaryRepositories.AddCommentaryAsync(commentary, userId, ticketId);
+            return true;
         }
 
         public async Task<IEnumerable<CommentaryDto>> GetAllCommentaries(int ticketId)

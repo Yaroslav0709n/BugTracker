@@ -31,8 +31,7 @@ namespace BugTracker.Application.Services
                 signingCredentials: new SigningCredentials(authSigningKeys, SecurityAlgorithms.HmacSha256)
                 );
 
-            return JsonSerializer.Serialize(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
-
+            return JsonSerializer.Serialize( new JwtSecurityTokenHandler().WriteToken(token) );
         }
     }
 }

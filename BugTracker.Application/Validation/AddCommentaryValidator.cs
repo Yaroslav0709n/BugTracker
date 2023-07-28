@@ -9,7 +9,7 @@ namespace BugTracker.Application.Validation
         {
             RuleFor(x => x.Text)
                 .NotEmpty()
-                .WithMessage("'Text' must be filled.")
+                .WithMessage("'Text' must be filled")
                 .MaximumLength(1000)
                 .WithMessage("'Text' must be no longer than 1000 characters");
         }

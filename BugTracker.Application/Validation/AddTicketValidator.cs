@@ -9,15 +9,15 @@ namespace BugTracker.Application.Validation
         {
             RuleFor(x => x.Title)
                 .NotEmpty()
-                .WithMessage("'Title' must be filled.")
+                .WithMessage("'Title' must be filled")
                 .MaximumLength(40)
-                .WithMessage("'Title' must be no longer than 40 characters.");
+                .WithMessage("'Title' must be no longer than 40 characters");
 
             RuleFor(x => x.Description)
                 .NotEmpty()
-                .WithMessage("'Description' must be filled.")
+                .WithMessage("'Description' must be filled")
                 .MaximumLength(250)
-                .WithMessage("'Description' must be no longer than 250 characters.");
+                .WithMessage("'Description' must be no longer than 250 characters");
         }
     }
 }

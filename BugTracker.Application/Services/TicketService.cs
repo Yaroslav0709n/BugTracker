@@ -65,6 +65,16 @@ namespace BugTracker.Application.Services
             return ticketsDto;
         }
 
+        public async Task<IEnumerable<TicketDto>> GetAllUsersTickets()
+        {
+            var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();
+            
+            var tickets = await _ticketRepository.GetAllUsersTicketsAsync(userId);
+            tickets.ThrowIfNull(nameof(tickets));
+
+            return _mapper.Map<IEnumerable<TicketDto>>(tickets);
+        }
+
         public async Task<InfoAboutTicketDto> GetTicket(int ticketId)
         {
             var ticket = await _ticketRepository.GetTicketAsync(ticketId);

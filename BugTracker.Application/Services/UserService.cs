@@ -32,6 +32,13 @@ namespace BugTracker.Application.Services
             return _mapper.Map<UserDto>(user);
         }
 
+        public async Task<IEnumerable<UserDto>> GetUsers()
+        {
+            var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();
+            var users = await _userRepository.GetUsersAsync(userId);
+            return _mapper.Map<IEnumerable<UserDto>>(users);
+        }
+
         public async Task<UpdateUserDto> UpdateUser(UpdateUserDto updateUserDto)
         {
             var userId = _contextAccessor.HttpContext!.User.GetCurrentUserId().ToString();

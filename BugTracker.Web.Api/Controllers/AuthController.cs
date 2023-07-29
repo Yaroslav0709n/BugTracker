@@ -1,8 +1,10 @@
-﻿using BugTracker.Application.Dtos.User;
+﻿using BugTracker.Application.Common.Exceptions;
+using BugTracker.Application.Dtos.User;
 using BugTracker.Application.IServices;
 using BugTracker.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Octokit.Internal;
 
 namespace BugTracker.Web.Api.Controllers
 {
@@ -56,12 +58,12 @@ namespace BugTracker.Web.Api.Controllers
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
             {
-                return BadRequest("Invalid email");
+                return BadRequest(new ErrorResponse { Error = "Invalid email" });
             }
 
             if (!await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
-                return BadRequest("Invalid password");
+                return BadRequest(new ErrorResponse { Error = "Invalid password" });
             }
 
             return new AuthUserDto

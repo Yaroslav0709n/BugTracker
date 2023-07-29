@@ -1,0 +1,86 @@
+.listStyles{ 
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 1070px,;
+    height: 360px
+}
+  
+.listStyles::-webkit-scrollbar { width: 5px; }
+    
+.listStyles::-webkit-scrollbar-track { background-color: #f1f1f1;}
+    
+.listStyles::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 4px; 
+}
+    
+.listStyles::-webkit-scrollbar-thumb:hover { background-color: #555; }  
+  
+.teamList {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    list-style-type: none; 
+    padding-left: 0;
+    padding-top: 0;
+    height: 300px;
+    width: 580px;
+}
+
+.teamList::-webkit-scrollbar { width: 5px; }
+  
+.teamList::-webkit-scrollbar-track { background-color: #f1f1f1; }
+  
+.teamList::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 4px; 
+}
+  
+.teamList::-webkit-scrollbar-thumb:hover { background-color: #555; }
+
+.userList {
+    height: 200px;
+    width: 450px;
+    overflow-y: auto;
+    list-style-type: none; 
+    padding-left: 0; 
+}
+
+.userList::-webkit-scrollbar { width: 5px; }
+  
+.userList::-webkit-scrollbar-track { background-color: #f1f1f1; }
+  
+.userList::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 4px; 
+}
+  
+.userList::-webkit-scrollbar-thumb:hover { background-color: #555; }
+
+.commentList{
+    flex: 1;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    list-style-type: none; 
+    padding-left: 0;
+    padding-top: 0;
+    height: 220px;
+    width: 470px;
+}
+
+.commentList::-webkit-scrollbar {
+    width: 5px; 
+}
+  
+.commentList::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+  
+.commentList::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 4px; 
+}
+  
+.commentList::-webkit-scrollbar-thumb:hover {
+    background-color: #555; 
+}

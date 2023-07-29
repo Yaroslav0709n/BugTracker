@@ -1,0 +1,23 @@
+.updateButton {
+    background-color: #28a745;
+}
+  
+.updateButton:hover {
+    background-color: #248b3c;
+} 
+  
+.cancelEditButton{
+    background-color: #dfb630;  
+}  
+  
+.cancelEditButton:hover {
+    background-color: #bd9a28;
+}
+  
+.deleteButton {
+    background-color: #a72828;
+}
+
+.deleteButton:hover {
+    background-color: #882121;
+}  

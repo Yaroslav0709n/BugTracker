@@ -1,0 +1,29 @@
+.formContainer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+  }
+  
+  .formContainer label {
+    display: block; 
+    margin-bottom: 5px; 
+  }
+
+  .linkContainer {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .linkContainer a {
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .linkContainer a:hover {
+    color: #555;
+  }
+  

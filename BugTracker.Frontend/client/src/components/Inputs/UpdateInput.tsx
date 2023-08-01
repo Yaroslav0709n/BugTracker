@@ -29,6 +29,7 @@ const UpdateInput: React.FC<InputProps> = ({ onClick, onChange, onFocus, name, v
         onFocus={onFocus} 
         className={className}
         onClick={onClick}
+        autoComplete="off"
     />
   );
 };

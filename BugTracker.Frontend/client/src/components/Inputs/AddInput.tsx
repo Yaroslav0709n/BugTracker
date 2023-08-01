@@ -32,6 +32,8 @@ const AddInput: React.FC<InputProps> = ({onChange, onFocus, name, id, value, cla
         onFocus={onFocus}
         className={className}
         placeholder={placeholder}
+        autoComplete="off"
+        pattern=""
     />
   );
 };

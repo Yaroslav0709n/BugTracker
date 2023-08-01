@@ -16,6 +16,6 @@
 - MS SQL
 - Authentication and authorization capabilities with JWT Bearer auth
 - Data validation with FluentValidation
-
+## GIF
 
 

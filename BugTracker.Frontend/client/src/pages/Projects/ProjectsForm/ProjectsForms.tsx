@@ -17,6 +17,8 @@ import UpdateInput from '../../../components/Inputs/UpdateInput';
 import Time from '../../../components/Time';
 import {Project, ProjectDto} from '../../../interface/Projects'
 import ProjectListComponents from '../../../components/ListComponents/ProjectsListComponents';
+import SearchInput from '../../../components/Inputs/SearchInput';
+
 
 const ProjectsForm: React.FC = () => {
   const [newProject, setNewProject] = useState<ProjectDto>({
@@ -31,7 +33,9 @@ const ProjectsForm: React.FC = () => {
   const [error, setError] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([]); 
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]); 
   const [userRole, setUserRole] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const token = localStorage.getItem('accessToken');
   const headers: AxiosRequestConfig['headers'] = {
@@ -77,7 +81,7 @@ const ProjectsForm: React.FC = () => {
       });
     }
   };
-
+  
   const handleUpdateProject = async () => {
     try {
       const updatedData = await updateProject(editingProjectId, newProject);
@@ -130,8 +134,15 @@ const ProjectsForm: React.FC = () => {
           Add Project 
         </AddButton>
       )}  
+      <SearchInput
+        projects={projects}
+        setFilteredProjects={setFilteredProjects}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        
+      />
       <ProjectListComponents className={listStyles.listStyles}>
-      {projects.map((project) => (
+      {filteredProjects.map((project) => (
         <ItemListComponents
           key={project.$id}
           onClick={() => project.id && navigate(`/tickets/${project.id}`)}
@@ -231,6 +242,7 @@ const ProjectsForm: React.FC = () => {
         </ItemListComponents>
       ))}
       </ProjectListComponents>
+
       <CreateProjectModal
         isOpen={isModalOpen}
         onCancel={() => setIsModalOpen(false)}

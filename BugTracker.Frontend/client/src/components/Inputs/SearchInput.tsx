@@ -9,7 +9,7 @@ interface InputProps {
 }
 
 const searchInput = {
-  width: '20%',
+  width: '21%',
   padding: '10px',
   border: '1px solid black',
   borderRadius: '6px',

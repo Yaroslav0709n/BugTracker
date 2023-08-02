@@ -2,10 +2,10 @@ using BugTracker.Application;
 using BugTracker.Web.Api.Extensions;
 using BugTracker.Application.Mappings;
 using FluentValidation.AspNetCore;
+using BugTracker.Web.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -35,10 +35,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseCustomExceptionHandler();
+app.UseCustomExceptionHandler();
 app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+
 app.MapControllers();
 app.Run();

@@ -17,5 +17,5 @@
 - Authentication and authorization capabilities with JWT Bearer auth
 - Data validation with FluentValidation
 ## GIF
-!(https://github.com/Yaroslav0709n/BugTracker/blob/master/data/auth.gif)
+![Image alt](https://github.com/Yaroslav0709n/BugTracker/blob/master/data/auth.gif)
 

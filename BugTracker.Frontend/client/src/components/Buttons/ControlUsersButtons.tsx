@@ -15,9 +15,17 @@ const modalButtons = {
 }
 
 const controlButton = {
-    padding: "8px 16px",
     marginLeft: "10px",
+    backgroundColor: "#28a745",
+    border: 'none', 
+    borderRadius: '4px', 
+    color: '#fff',
+    fontSize: '12px',
+    cursor: 'pointer',
+    marginBottom: "10px",
+    padding: "10px 20px",     
 };
+
 const ControlUsersButtons: React.FC<ButtonProps> = ({ 
     onClick, 
     onCancel, 

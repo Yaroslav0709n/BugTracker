@@ -7,7 +7,7 @@ interface ButtonProps {
 }
 
 const buttonStyles = {
-  transition: '0.3s',
+  transition: '0.3s', 
   color: '#fff',
   border: 'none', 
   borderRadius: '4px', 

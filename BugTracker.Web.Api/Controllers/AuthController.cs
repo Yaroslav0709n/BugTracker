@@ -4,7 +4,6 @@ using BugTracker.Application.IServices;
 using BugTracker.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Octokit.Internal;
 
 namespace BugTracker.Web.Api.Controllers
 {

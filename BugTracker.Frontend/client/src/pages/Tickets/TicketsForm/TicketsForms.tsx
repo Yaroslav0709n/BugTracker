@@ -117,7 +117,7 @@ const TicketsForm: React.FC = () => {
             </p>
             {ticket.createdByUserId === `${firstName} ${lastName}` && (
             <ControlButton
-                className={btnStyles.deleteButton}
+                className={btnStyles.redButton}
                 onClick={(e) => {
                     e.stopPropagation();
                     ticket.id && deleteTicket(ticket.id)

@@ -174,7 +174,7 @@ const ProjectsForm: React.FC = () => {
               /> 
               <Time item={project}/>
               <ControlButton 
-                className={btnStyles.updateButton}
+                className={btnStyles.greenButton}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleUpdateProject();
@@ -183,7 +183,7 @@ const ProjectsForm: React.FC = () => {
                 Update
               </ControlButton>
               <ControlButton
-                className={btnStyles.cancelEditButton}
+                className={btnStyles.yellowButton}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleCancelEdit();
@@ -214,7 +214,7 @@ const ProjectsForm: React.FC = () => {
               {userRole === 'Project Manager' && (
                 <div>
                   <ControlButton
-                    className={btnStyles.updateButton} 
+                    className={btnStyles.greenButton} 
                     onClick={(e) => {
                       e.stopPropagation();
                       project.id && handleEditProject(project.id);
@@ -223,7 +223,7 @@ const ProjectsForm: React.FC = () => {
                     Edit
                   </ControlButton>
                   <ControlButton
-                    className={btnStyles.deleteButton}
+                    className={btnStyles.redButton}
                     onClick={(e) => {
                       e.stopPropagation();
                       project.id && deleteProject(project.id);

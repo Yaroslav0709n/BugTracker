@@ -18,4 +18,7 @@
 - Data validation with FluentValidation
 ## GIF
 ![Image alt](https://github.com/Yaroslav0709n/BugTracker/blob/master/data/auth.gif)
+![Image alt](https://github.com/Yaroslav0709n/BugTracker/blob/master/data/create-project.gif)
+![Image alt](https://github.com/Yaroslav0709n/BugTracker/blob/master/data/add-user-in-project.gif)
+![Image alt](https://github.com/Yaroslav0709n/BugTracker/blob/master/data/create-ticket.gif)
 

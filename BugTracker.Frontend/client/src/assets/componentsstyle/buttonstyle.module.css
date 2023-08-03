@@ -1,23 +1,23 @@
-.updateButton {
+.greenButton {
     background-color: #28a745;
 }
   
-.updateButton:hover {
+.greenButton:hover {
     background-color: #248b3c;
 } 
   
-.cancelEditButton{
+.yellowButton{
     background-color: #dfb630;  
 }  
   
-.cancelEditButton:hover {
-    background-color: #bd9a28;
+.yellowButton:hover {
+    background-color: #bd9a28; 
 }
   
-.deleteButton {
+.redButton {
     background-color: #a72828;
 }
 
-.deleteButton:hover {
+.redButton:hover {
     background-color: #882121;
 }  

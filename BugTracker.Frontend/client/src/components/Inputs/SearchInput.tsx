@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Project } from '../../interface/Projects';
 
 interface InputProps {
-  projects: Project[];
+  lists: Project[];
   setFilteredProjects: React.Dispatch<React.SetStateAction<Project[]>>;
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const searchInput = {
-  width: '21%',
+  width: '20%',
   padding: '10px',
   border: '1px solid black',
   borderRadius: '6px',
@@ -18,11 +16,12 @@ const searchInput = {
 };
 
 const SearchInput: React.FC<InputProps> = ({
-  projects,
+  lists,
   setFilteredProjects,
-  searchQuery,
-  setSearchQuery,
+
 }) => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setSearchQuery(value);
@@ -30,11 +29,12 @@ const SearchInput: React.FC<InputProps> = ({
 
   React.useEffect(() => {
     setFilteredProjects(
-      projects.filter((project) =>
-        project.name.toLowerCase().includes(searchQuery.toLowerCase())
+      lists.filter((list) =>
+        list.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        list.description.toLowerCase().includes(searchQuery.toLowerCase())
       )
     );
-  }, [searchQuery, projects]);
+  }, [searchQuery, lists]);
 
   return (
     <input

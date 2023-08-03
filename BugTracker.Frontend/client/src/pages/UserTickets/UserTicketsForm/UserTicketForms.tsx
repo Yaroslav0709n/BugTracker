@@ -3,24 +3,16 @@ import listStyles from '../../../assets/componentsstyle/liststyle.module.css';
 import { useNavigate } from 'react-router';
 import axios, { AxiosRequestConfig } from 'axios';
 import { useParams } from 'react-router-dom';
-import ProjectListComponents from '../../../components/ListComponents/ProjectsListComponents';
+import ProjectTicketListComponents from '../../../components/ListComponents/ProjectTicketListComponents';
 import ItemListComponents from '../../../components/ListComponents/ItemListComponents';
 import Time from '../../../components/Time';
+import {UserTickets} from '../../../interface/UserTicket'
 
-
-interface UserTickets{
-  id?: string;
-  title: string;
-  description: string; 
-  createTime: string;
-  updateTime: string;
-}
-
-
-const UserTickets: React.FC = () => {
+const UserTicketsForm: React.FC = () => {
     const [tickets, setTickets] = useState<UserTickets[]>([]);
     const navigate = useNavigate();
     const { projectId } = useParams<{ projectId: string }>();
+    const [filteredProjects, setFilteredProjects] = useState<UserTickets[]>([]); 
 
     useEffect(() => {
         const fetchTickets = async () => {
@@ -51,8 +43,8 @@ const UserTickets: React.FC = () => {
         marginLeft: "260px",
       }}>
       <h1>Tickets</h1>
-      <ProjectListComponents className={listStyles.listStyles}>
-      {tickets.map((ticket) => (
+      <ProjectTicketListComponents className={listStyles.listStyles}>
+      {filteredProjects.map((ticket) => (
         <ItemListComponents key={ticket.id} 
              onClick={() => ticket.id && navigate(`/userticket/${projectId}/${ticket.id}`)}
              >
@@ -75,9 +67,9 @@ const UserTickets: React.FC = () => {
             <Time item={ticket}/>
           </ItemListComponents>
         ))}
-      </ProjectListComponents>
+      </ProjectTicketListComponents>
       </div>
       );    
 };
 
-export default UserTickets;
+export default UserTicketsForm;

@@ -16,7 +16,7 @@ import ItemListComponents from '../../../components/ListComponents/ItemListCompo
 import UpdateInput from '../../../components/Inputs/UpdateInput';
 import Time from '../../../components/Time';
 import {Project, ProjectDto} from '../../../interface/Projects'
-import ProjectListComponents from '../../../components/ListComponents/ProjectsListComponents';
+import ProjectListComponents from '../../../components/ListComponents/ProjectTicketListComponents';
 import SearchInput from '../../../components/Inputs/SearchInput';
 
 
@@ -35,7 +35,6 @@ const ProjectsForm: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]); 
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]); 
   const [userRole, setUserRole] = useState<string>('');
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const token = localStorage.getItem('accessToken');
   const headers: AxiosRequestConfig['headers'] = {
@@ -135,11 +134,8 @@ const ProjectsForm: React.FC = () => {
         </AddButton>
       )}  
       <SearchInput
-        projects={projects}
+        lists={projects}
         setFilteredProjects={setFilteredProjects}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        
       />
       <ProjectListComponents className={listStyles.listStyles}>
       {filteredProjects.map((project) => (

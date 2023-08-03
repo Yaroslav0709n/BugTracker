@@ -37,7 +37,7 @@ const fieldOfUpdateTime: CSSProperties = {
     fontSize: "13px",
 }
 
-const ProjectListComponents: React.FC<ListProps> = ({children, className }) => {
+const ProjectTicketListComponents: React.FC<ListProps> = ({children, className }) => {
     
   return ( 
     <div>
@@ -56,4 +56,4 @@ const ProjectListComponents: React.FC<ListProps> = ({children, className }) => {
   );
 };
 
-export default ProjectListComponents;
+export default ProjectTicketListComponents;

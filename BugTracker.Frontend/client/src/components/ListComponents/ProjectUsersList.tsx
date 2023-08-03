@@ -79,7 +79,7 @@ const ProjectUsersList: React.FC<ListProps> = ({projectId, userRole}) => {
                         </p>
                         {userRole === 'Project Manager' && (
                         <ControlButton
-                            className={btnStyles.deleteButton}
+                            className={btnStyles.redButton}
                             onClick={() => deleteUser(user.id, projectId)}
                         >
                             Delete 

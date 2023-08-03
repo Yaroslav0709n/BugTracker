@@ -3,6 +3,7 @@ import React, { CSSProperties, useEffect, useState } from 'react';
 import { User } from '../../interface/Users';
 import SaveCancelUsersButtons from '../Buttons/SaveCancelUsersButtons';
 import getToken from '../../common/getToken';
+import btnStyles from '../../assets/componentsstyle/buttonstyle.module.css'
 
 interface UserListProps {
   ticketId: string | undefined;
@@ -111,12 +112,12 @@ const AddTicketUsersList: React.FC<UserListProps> = ({ ticketId, projectId, isAd
        ))}
     </ul>
     {isAddUserFormOpen && (
-        <SaveCancelUsersButtons onClick={(e:any) => handleAddUsersToProject(ticketId ?? '')}        >
+        <SaveCancelUsersButtons className={btnStyles.greenButton} onClick={(e:any) => handleAddUsersToProject(ticketId ?? '')}        >
           Save Users
         </SaveCancelUsersButtons>
       )}
       {isAddUserFormOpen && (
-        <SaveCancelUsersButtons style={{marginLeft: "100px"}} onClick={handleToggleCanceleAddUserForm}>
+        <SaveCancelUsersButtons className={btnStyles.yellowButton} style={{marginLeft: "100px"}} onClick={handleToggleCanceleAddUserForm}>
           Cancel
         </SaveCancelUsersButtons>
       )}

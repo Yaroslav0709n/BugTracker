@@ -76,7 +76,7 @@ const TicketUsersList: React.FC<ListProps> = ({ticketId, userRole}) => {
                         </p>
                         {userRole === 'Project Manager' && (
                         <ControlButton
-                            className={btnStyles.deleteButton}
+                            className={btnStyles.redButton}
                             onClick={() => deleteUser(user.id, ticketId)}
                         >
                             Delete  

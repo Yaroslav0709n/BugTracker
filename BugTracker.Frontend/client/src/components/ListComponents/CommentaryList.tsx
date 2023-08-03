@@ -47,7 +47,7 @@ const CommentaryList: React.FC<ListProps> = ({comments, firstName, lastName, use
                           }}>{moment(comment.createTime).format('HH:mm DD-MM')}</p>
                 {comment.createdByUserId === `${firstName} ${lastName}` && userEmailExists == true && (
                   <ControlButton
-                    className={btnStyles.deleteButton}
+                    className={btnStyles.redButton}
                     onClick={() => deleteComment(comment.id, setIsLoading)}
                     style={{height: "30px",
                             width: "30px",

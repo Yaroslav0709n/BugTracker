@@ -114,7 +114,7 @@ const FullTicketInfo: React.FC<ComponentsProps> = ({userEmailExists, ticket}) =>
                          marginLeft: "320px",
                          marginTop: "360px"}}>
             <ControlButton
-                className={btnStyles.updateButton}
+                className={btnStyles.greenButton}
                 onClick={(e) => {
                                 e.stopPropagation();
                                 updateMethodTicket(updateTicket, 
@@ -128,7 +128,7 @@ const FullTicketInfo: React.FC<ComponentsProps> = ({userEmailExists, ticket}) =>
                 Update
               </ControlButton>
               <ControlButton
-                className={btnStyles.cancelEditButton}
+                className={btnStyles.yellowButton}
                 onClick={handleCancelEdit}
               >
                 Cancel
@@ -165,7 +165,7 @@ const FullTicketInfo: React.FC<ComponentsProps> = ({userEmailExists, ticket}) =>
                          marginTop: "330px"}}>
                 {userEmailExists == true && (
                   <ControlButton
-                    className={btnStyles.updateButton}
+                    className={btnStyles.greenButton}
                     onClick={(e) => {
                       e.stopPropagation();
                       editTicket(setIsEditing, 
